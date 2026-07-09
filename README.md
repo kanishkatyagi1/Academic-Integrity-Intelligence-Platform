@@ -1,197 +1,319 @@
-# Academic Integrity Intelligence Platform (AIIP)
+# 📚 Academic Integrity Intelligence Platform (AIIP)
 
-> A clean, working demo built for the IBM AICTE Internship submission.
+> An AI-powered Academic Integrity Platform built using **IBM Cloud**, **IBM watsonx.ai Foundation Models**, **IBM watsonx Orchestrate**, **React**, and **FastAPI** to intelligently analyze assignment submissions and generate academic integrity reports.
 
-AIIP lets a user upload an assignment PDF, extracts the text through a FastAPI backend, sends it for IBM Granite–style academic integrity analysis, and displays a structured report in a React interface.
-
-> **Note:** This is intentionally a demo project for internship submission — not a production or enterprise product.
-
----
-
-## Table of Contents
-
-- [Tech Stack](#tech-stack)
-- [Features](#features)
-- [Folder Structure](#folder-structure)
-- [Getting Started](#getting-started)
-  - [Backend Setup](#backend-setup)
-  - [IBM Granite Configuration](#ibm-granite-configuration)
-  - [Frontend Setup](#frontend-setup)
-- [API Endpoints](#api-endpoints)
-- [Demo Flow](#demo-flow)
-- [Known Limitations](#known-limitations)
-- [Notes for Submission](#notes-for-submission)
-- [License](#license)
+![IBM Cloud](https://img.shields.io/badge/IBM-Cloud-blue)
+![watsonx.ai](https://img.shields.io/badge/IBM-watsonx.ai-blue)
+![React](https://img.shields.io/badge/React-Vite-61DAFB)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688)
+![Python](https://img.shields.io/badge/Python-3.11-yellow)
 
 ---
 
-## Tech Stack
+# 📖 Project Overview
 
-| Layer    | Technology |
-|----------|------------|
-| Frontend | React, Vite, TailwindCSS |
-| Backend  | FastAPI |
-| AI       | IBM Granite via watsonx.ai (when credentials are configured) |
-| Storage  | Local `uploads/` and `reports/` folders |
+Academic institutions are facing increasing challenges in detecting sophisticated plagiarism, especially with the widespread use of AI-assisted writing tools.
 
-## Features
+The **Academic Integrity Intelligence Platform (AIIP)** is an AI-powered web application that enables students and faculty to upload assignment PDFs, extract the document text, analyze it using **IBM watsonx.ai Foundation Models**, and generate a comprehensive academic integrity report.
 
-- Home page with project overview
-- PDF upload page
-- PDF text extraction
-- IBM Granite analysis prompt covering:
-  - Summary
-  - Possible plagiarism observations
-  - Possible AI-generated content
-  - Citation suggestions
-  - Academic Integrity Score (0–100)
-  - Recommendations
-- Structured, readable report page
-- Auto-generated FastAPI OpenAPI documentation
-- Clear API errors when IBM credentials are missing or Granite is unreachable
+The platform provides:
 
-## Folder Structure
+- Assignment Summary
+- Academic Integrity Score
+- Possible Plagiarism Observations
+- AI-generated Content Analysis
+- Citation Suggestions
+- Recommendations for Improvement
+
+The project also integrates **IBM watsonx Orchestrate** to provide an intelligent conversational assistant capable of answering questions related to academic integrity and plagiarism policies.
+
+---
+
+# 🚀 Features
+
+- 📄 Upload Assignment PDF
+- 📝 Automatic PDF Text Extraction
+- 🤖 AI-powered Academic Integrity Analysis
+- 📊 Academic Integrity Score (0–100)
+- 🔍 Possible Plagiarism Detection
+- 🧠 AI-generated Content Analysis
+- 📚 Citation Suggestions
+- 💡 Personalized Recommendations
+- ⚡ FastAPI REST API
+- 📄 OpenAPI (Swagger) Documentation
+- ☁ IBM watsonx.ai Integration
+- 🤝 IBM watsonx Orchestrate Agent
+
+---
+
+# 🏗 System Architecture
 
 ```
-academic-integrity-intelligence-platform/
+Student Uploads Assignment PDF
+            │
+            ▼
+      React Frontend
+            │
+            ▼
+      FastAPI Backend
+            │
+            ▼
+   PDF Text Extraction
+            │
+            ▼
+IBM watsonx.ai Foundation Models
+            │
+            ▼
+Academic Integrity Analysis
+            │
+            ▼
+Academic Integrity Report
+```
+
+---
+
+# 🛠 Technology Stack
+
+| Layer | Technology |
+|--------|------------|
+| Frontend | React, Vite, Tailwind CSS |
+| Backend | FastAPI, Python |
+| AI | IBM watsonx.ai Foundation Models (Meta Llama 3.3 70B Instruct) |
+| IBM Services | IBM Cloud, IBM watsonx.ai, IBM watsonx Orchestrate |
+| PDF Processing | PyPDF2 |
+| Storage | Local File System |
+
+---
+
+# ☁ IBM Technologies Used
+
+- IBM Cloud
+- IBM watsonx.ai
+- IBM watsonx Orchestrate
+- IBM Foundation Models
+- IBM Identity & Access Management (IAM)
+
+---
+
+# 📂 Project Structure
+
+```
+Academic-Integrity-Intelligence-Platform/
+│
 ├── backend/
 │   ├── app/
-│   │   ├── __init__.py
-│   │   ├── config.py
-│   │   ├── granite_service.py
-│   │   ├── main.py
-│   │   ├── models.py
-│   │   ├── pdf_utils.py
-│   │   └── storage.py
+│   ├── requirements.txt
 │   ├── .env.example
-│   └── requirements.txt
-├── dataset/
-│   └── sample-assignment.txt
+│   └── ...
+│
 ├── frontend/
 │   ├── src/
-│   │   ├── pages/
-│   │   │   ├── HomePage.jsx
-│   │   │   ├── ReportPage.jsx
-│   │   │   └── UploadPage.jsx
-│   │   ├── api.js
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── styles.css
-│   ├── index.html
 │   ├── package.json
-│   ├── postcss.config.js
-│   └── tailwind.config.js
-├── reports/
+│   └── ...
+│
+├── dataset/
+│
 ├── uploads/
-└── README.md
+│
+├── reports/
+│
+├── screenshots/
+│   ├── home.png
+│   ├── upload.png
+│   └── report.png
+│
+├── AICTE_Project_Presentation.pptx
+├── problemstatement.pdf
+├── README.md
+└── requirements.txt
 ```
 
-## Getting Started
+---
 
-### Backend Setup
+# ⚙ Installation
 
-From the project root:
+## 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/Academic-Integrity-Intelligence-Platform.git
+
+cd Academic-Integrity-Intelligence-Platform
+```
+
+---
+
+## 2️⃣ Backend
 
 ```bash
 cd backend
+
 python -m venv .venv
+```
 
-# Activate the virtual environment
-# Windows
+Windows
+
+```bash
 .venv\Scripts\activate
-# macOS / Linux
-source .venv/bin/activate
+```
 
+Linux / macOS
+
+```bash
+source .venv/bin/activate
+```
+
+Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
+
+Run backend
+
+```bash
 uvicorn app.main:app --reload --port 8000
 ```
 
-Backend URLs:
+Backend URLs
 
-- Health check: `http://localhost:8000/health`
-- OpenAPI JSON: `http://localhost:8000/openapi.json`
-- Swagger UI: `http://localhost:8000/docs`
+```
+http://localhost:8000/health
 
-### IBM Granite Configuration
+http://localhost:8000/docs
 
-Copy `backend/.env.example` to `backend/.env` and fill in your IBM watsonx.ai credentials:
-
-```env
-IBM_API_KEY=your-api-key
-IBM_PROJECT_ID=your-project-id
-IBM_REGION=us-south
-IBM_GRANITE_MODEL_ID=ibm/granite-13b-instruct-v2
+http://localhost:8000/openapi.json
 ```
 
-If credentials aren't configured, the backend returns a clear API error rather than silently switching to demo output. Set `DEMO_MODE=true` in `backend/.env` only when you intentionally want local demo output (no real IBM credentials required).
+---
 
-### Frontend Setup
+## 3️⃣ Frontend
 
-Open a second terminal from the project root:
+Open another terminal
 
 ```bash
 cd frontend
+
 npm install
+
 npm run dev
 ```
 
-Frontend URL: `http://localhost:5173`
+Frontend
 
-## API Endpoints
-
-### `GET /health`
-
-Checks whether the backend is running.
-
-### `POST /upload`
-
-Accepts a PDF assignment as multipart form data.
-
-**Response includes:**
-- `file_id`
-- `filename`
-- `text`
-- `text_length`
-
-### `POST /analyze`
-
-Accepts extracted text and returns an academic integrity report.
-
-**Request body:**
-
-```json
-{
-  "file_id": "optional-upload-id",
-  "text": "Extracted assignment text..."
-}
+```
+http://localhost:5173
 ```
 
-## Demo Flow
+---
 
-1. Start the backend.
-2. Start the frontend.
-3. Open the frontend in a browser.
-4. Go to the Upload page.
-5. Select an assignment PDF.
-6. Generate the integrity report.
-7. Review the report page.
+# 🔑 IBM Configuration
 
-## Known Limitations
+Create
 
-- No authentication or multi-user support — this is a single-session demo.
-- No persistent database; reports and uploads are stored as local files, not in a DB.
-- Plagiarism detection is prompt-based (via Granite) rather than backed by a reference corpus or web-crawling engine, so results should be treated as indicative, not authoritative.
-- Not optimized for large PDFs or high concurrent load.
+```
+backend/.env
+```
 
-## Notes for Submission
+Example
 
-- Clean module separation between `backend/app` components.
-- FastAPI automatically generates OpenAPI documentation.
-- Reports are saved as JSON files in `reports/`.
-- Uploaded PDFs are saved in `uploads/`.
-- Real Granite analysis is used when IBM credentials are provided.
-- Local demo output is available only when `DEMO_MODE=true` is explicitly set.
+```env
+IBM_API_KEY=your_api_key
+IBM_PROJECT_ID=your_project_id
+IBM_REGION=eu-gb
+IBM_GRANITE_MODEL_ID=meta-llama/llama-3-3-70b-instruct
+CORS_ORIGINS=http://localhost:5173,http://127.0.0.1:5173
+```
 
-## License
+> **Note:** Use your own IBM Cloud API Key and watsonx.ai Project ID. Never commit the `.env` file to GitHub.
 
-No license currently specified. Add a `LICENSE` file (e.g., MIT) if you intend for others to reuse this code.
+---
+
+# 🌐 API Endpoints
+
+## Health
+
+```
+GET /health
+```
+
+---
+
+## Upload Assignment
+
+```
+POST /upload
+```
+
+Uploads a PDF and extracts the text.
+
+---
+
+## Analyze Assignment
+
+```
+POST /analyze
+```
+
+Analyzes extracted text using IBM watsonx.ai Foundation Models and returns an Academic Integrity Report.
+
+---
+
+# 📈 Results
+
+The developed system successfully:
+
+- Extracts text from uploaded PDF assignments.
+- Generates AI-powered academic integrity reports.
+- Produces an Academic Integrity Score.
+- Detects possible plagiarism indicators.
+- Identifies potential AI-generated writing.
+- Suggests citation improvements.
+- Provides actionable academic recommendations.
+
+---
+
+# 📸 Screenshots
+
+## 🏠 Home Page
+
+> *(Add `screenshots/home.png`)*
+
+---
+
+## 📄 Upload Assignment
+
+> *(Add `screenshots/upload.png`)*
+
+---
+
+## 📊 Academic Integrity Report
+
+> *(Add `screenshots/report.png`)*
+
+---
+
+# 🔮 Future Scope
+
+- Instructor-specific writing style analysis
+- Semantic plagiarism detection using vector embeddings
+- Learning Management System (LMS) integration
+- Multi-language academic integrity analysis
+- Historical assignment comparison
+- Institutional analytics dashboard
+- Explainable AI reports for faculty
+
+---
+
+# 👨‍💻 Author
+
+**Kanishka Tyagi**
+
+IBM AICTE Internship 2026
+
+Academic Integrity Intelligence Platform (AIIP)
+
+---
+
+# 📄 License
+
+This project was developed as part of the **IBM AICTE Internship 2026** for educational and demonstration purposes.
