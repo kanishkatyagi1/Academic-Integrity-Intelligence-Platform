@@ -276,19 +276,22 @@ The developed system successfully:
 
 ## 🏠 Home Page
 
-> *(Add `screenshots/home.png`)*
+> <img width="1918" height="968" alt="image" src="https://github.com/user-attachments/assets/77b1951f-0548-4d10-b285-4a24483d3c36" />
+
 
 ---
 
 ## 📄 Upload Assignment
 
-> *(Add `screenshots/upload.png`)*
+> <img width="1917" height="912" alt="image" src="https://github.com/user-attachments/assets/9bc76b1e-f821-4ae4-94ef-264009c0e7f5" />
+
 
 ---
 
 ## 📊 Academic Integrity Report
 
-> *(Add `screenshots/report.png`)*
+> <img width="1918" height="911" alt="image" src="https://github.com/user-attachments/assets/224dddda-d0d0-468b-bbc5-91d24731fb44" />
+
 
 ---
 
