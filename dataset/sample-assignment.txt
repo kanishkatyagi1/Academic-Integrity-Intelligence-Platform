@@ -1,0 +1,7 @@
+# Sample assignment text that can be copied into a PDF for testing the demo.
+
+Artificial intelligence is increasingly used in higher education for tutoring,
+drafting, and feedback. In conclusion, it is important to note that students
+must cite external ideas and disclose AI assistance when required by policy.
+Academic integrity depends on originality, transparent sources, and responsible
+use of digital tools.

@@ -1,0 +1,10 @@
+# Ignore local environment files, dependency folders, and generated runtime files.
+backend/.env
+backend/.venv/
+frontend/node_modules/
+frontend/dist/
+uploads/*.pdf
+uploads/*_*.pdf
+reports/*.json
+__pycache__/
+*.pyc
