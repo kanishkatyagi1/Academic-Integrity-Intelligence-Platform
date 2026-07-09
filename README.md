@@ -1,37 +1,58 @@
 # Academic Integrity Intelligence Platform (AIIP)
 
-<!-- README for the IBM AICTE internship full-stack demo project. -->
+> A clean, working demo built for the IBM AICTE Internship submission.
 
-AIIP is a clean working demo for IBM AICTE Internship submission. It lets a user upload an assignment PDF, extracts the PDF text through a FastAPI backend, sends the text for IBM Granite-style academic integrity analysis, and displays a structured report in a React interface.
+AIIP lets a user upload an assignment PDF, extracts the text through a FastAPI backend, sends it for IBM Granite–style academic integrity analysis, and displays a structured report in a React interface.
 
-This is intentionally a demo project, not an enterprise product.
+> **Note:** This is intentionally a demo project for internship submission — not a production or enterprise product.
+
+---
+
+## Table of Contents
+
+- [Tech Stack](#tech-stack)
+- [Features](#features)
+- [Folder Structure](#folder-structure)
+- [Getting Started](#getting-started)
+  - [Backend Setup](#backend-setup)
+  - [IBM Granite Configuration](#ibm-granite-configuration)
+  - [Frontend Setup](#frontend-setup)
+- [API Endpoints](#api-endpoints)
+- [Demo Flow](#demo-flow)
+- [Known Limitations](#known-limitations)
+- [Notes for Submission](#notes-for-submission)
+- [License](#license)
+
+---
 
 ## Tech Stack
 
-- Frontend: React, Vite, TailwindCSS
-- Backend: FastAPI
-- AI: IBM Granite through watsonx.ai when credentials are configured
-- Storage: Local `uploads/` and `reports/` folders
+| Layer    | Technology |
+|----------|------------|
+| Frontend | React, Vite, TailwindCSS |
+| Backend  | FastAPI |
+| AI       | IBM Granite via watsonx.ai (when credentials are configured) |
+| Storage  | Local `uploads/` and `reports/` folders |
 
 ## Features
 
-- Home page for the project overview
+- Home page with project overview
 - PDF upload page
 - PDF text extraction
-- IBM Granite analysis prompt for:
+- IBM Granite analysis prompt covering:
   - Summary
   - Possible plagiarism observations
   - Possible AI-generated content
   - Citation suggestions
-  - Academic Integrity Score from 0 to 100
+  - Academic Integrity Score (0–100)
   - Recommendations
-- Beautiful report page
-- FastAPI OpenAPI documentation
-- Clear API errors when IBM credentials are missing or Granite cannot be reached
+- Structured, readable report page
+- Auto-generated FastAPI OpenAPI documentation
+- Clear API errors when IBM credentials are missing or Granite is unreachable
 
 ## Folder Structure
 
-```text
+```
 academic-integrity-intelligence-platform/
 ├── backend/
 │   ├── app/
@@ -65,25 +86,33 @@ academic-integrity-intelligence-platform/
 └── README.md
 ```
 
-## Backend Setup
+## Getting Started
+
+### Backend Setup
 
 From the project root:
 
 ```bash
 cd backend
 python -m venv .venv
+
+# Activate the virtual environment
+# Windows
 .venv\Scripts\activate
+# macOS / Linux
+source .venv/bin/activate
+
 pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
 ```
 
 Backend URLs:
 
-- Health API: `http://localhost:8000/health`
+- Health check: `http://localhost:8000/health`
 - OpenAPI JSON: `http://localhost:8000/openapi.json`
 - Swagger UI: `http://localhost:8000/docs`
 
-## IBM Granite Configuration
+### IBM Granite Configuration
 
 Copy `backend/.env.example` to `backend/.env` and fill in your IBM watsonx.ai credentials:
 
@@ -94,9 +123,9 @@ IBM_REGION=us-south
 IBM_GRANITE_MODEL_ID=ibm/granite-13b-instruct-v2
 ```
 
-If credentials are not configured, the backend returns a clear API error instead of silently switching to demo output. Set `DEMO_MODE=true` in `backend/.env` only when you intentionally want local demo output.
+If credentials aren't configured, the backend returns a clear API error rather than silently switching to demo output. Set `DEMO_MODE=true` in `backend/.env` only when you intentionally want local demo output (no real IBM credentials required).
 
-## Frontend Setup
+### Frontend Setup
 
 Open a second terminal from the project root:
 
@@ -106,34 +135,29 @@ npm install
 npm run dev
 ```
 
-Frontend URL:
-
-```text
-http://localhost:5173
-```
+Frontend URL: `http://localhost:5173`
 
 ## API Endpoints
 
-### GET `/health`
+### `GET /health`
 
 Checks whether the backend is running.
 
-### POST `/upload`
+### `POST /upload`
 
 Accepts a PDF assignment as multipart form data.
 
-Response includes:
-
+**Response includes:**
 - `file_id`
 - `filename`
 - `text`
 - `text_length`
 
-### POST `/analyze`
+### `POST /analyze`
 
 Accepts extracted text and returns an academic integrity report.
 
-Request:
+**Request body:**
 
 ```json
 {
@@ -147,16 +171,27 @@ Request:
 1. Start the backend.
 2. Start the frontend.
 3. Open the frontend in a browser.
-4. Go to Upload.
+4. Go to the Upload page.
 5. Select an assignment PDF.
 6. Generate the integrity report.
 7. Review the report page.
 
+## Known Limitations
+
+- No authentication or multi-user support — this is a single-session demo.
+- No persistent database; reports and uploads are stored as local files, not in a DB.
+- Plagiarism detection is prompt-based (via Granite) rather than backed by a reference corpus or web-crawling engine, so results should be treated as indicative, not authoritative.
+- Not optimized for large PDFs or high concurrent load.
+
 ## Notes for Submission
 
-- The project uses clean module separation.
-- FastAPI automatically generates OpenAPI.
+- Clean module separation between `backend/app` components.
+- FastAPI automatically generates OpenAPI documentation.
 - Reports are saved as JSON files in `reports/`.
 - Uploaded PDFs are saved in `uploads/`.
 - Real Granite analysis is used when IBM credentials are provided.
-- Local demo output is available only when `DEMO_MODE=true` is explicitly configured.
+- Local demo output is available only when `DEMO_MODE=true` is explicitly set.
+
+## License
+
+No license currently specified. Add a `LICENSE` file (e.g., MIT) if you intend for others to reuse this code.
